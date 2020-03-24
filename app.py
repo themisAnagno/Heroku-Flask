@@ -8,6 +8,7 @@ from resources.item import Item, ItemList
 from security import authentication, identity
 
 app = Flask(__name__)
+db.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
@@ -17,15 +18,20 @@ except KeyError:
     app.secret_key = "secret"
 jwt = JWT(app, authentication, identity)
 
+api.add_resource(Item, "/item/<string:name>")
+api.add_resource(ItemList, "/items")
+api.add_resource(UserRegister, "/register")
+
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 
 @app.route("/")
 def home():
     return "Hello, world"
 
-
-api.add_resource(Item, "/item/<string:name>")
-api.add_resource(ItemList, "/items")
-api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
     db.init_app(app)
