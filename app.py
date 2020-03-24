@@ -9,13 +9,10 @@ from security import authentication, identity
 
 app = Flask(__name__)
 db.init_app(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
-try:
-    app.secret_key = os.environ["SECRET"]
-except KeyError:
-    app.secret_key = "secret"
+app.secret_key = os.environ.get("SECRET", "secret")
 jwt = JWT(app, authentication, identity)
 
 api.add_resource(Item, "/item/<string:name>")
