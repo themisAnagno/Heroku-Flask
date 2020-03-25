@@ -8,6 +8,9 @@ class Item(Resource):
     parser.add_argument(
         "price", required=True, type=float, help="Please give a price for this item"
     )
+    parser.add_argument(
+        "store_id", required=True, type=str, help="Please insert the store for this item"
+    )
 
     def get(self, name):
         item = ItemModel.retrieve_item(name)

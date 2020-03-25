@@ -8,9 +8,13 @@ class ItemModel(db.Model):
     name = db.Column(db.String(20))
     price = db.Column(db.Float(precision=2))
 
-    def __init__(self, name, price, _id=None):
+    store_id = db.Column(db.Text, db.ForeignKey("stores.id"))
+    store = db.relationship("StoreModel")
+
+    def __init__(self, name, price, store_id, _id=None):
         self.name = name
         self.price = price
+        self.store_id = store_id
         if not _id:
             self.id = str(uuid1())
 
@@ -28,13 +32,14 @@ class ItemModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def update_item(self, name, price):
+    def update_item(self, name, price, store_id):
         self.name = name
         self.price = price
+        self.store_id = store_id
         self.store_item()
 
     def json(self):
-        return {"name": self.name, "price": self.price}
+        return {"name": self.name, "price": self.price, "store": self.store_id}
 
 
 class ItemListModel():
