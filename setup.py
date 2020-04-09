@@ -14,7 +14,7 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = "th-flask"
 DESCRIPTION = "Flask application that implements an items database"
-URL = "https://github.com/me/myproject"
+URL = "https://github.com/themisAnagno/th-flask.git"
 EMAIL = "thmanagnostopoulos@gmail.com"
 AUTHOR = "Themis Anagnostopoulos"
 REQUIRES_PYTHON = ">=3.7.0"
@@ -99,6 +99,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
+    download_url="https://github.com/themisAnagno/th-flask/archive/v0.1.0.zip",
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
