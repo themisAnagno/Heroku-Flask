@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from models.stores import StoreModel, StoreListModel
+from thflask.models.stores import StoreModel, StoreListModel
 
 
 class Store(Resource):

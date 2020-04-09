@@ -1,5 +1,5 @@
 from uuid import uuid1
-from db import db
+from thflask.db import db
 
 
 class ItemModel(db.Model):
@@ -42,7 +42,7 @@ class ItemModel(db.Model):
         return {"name": self.name, "price": self.price, "store": self.store_id}
 
 
-class ItemListModel():
+class ItemListModel:
     @classmethod
     def retrieve_item_list(cls):
         item_list = ItemModel.query.all()

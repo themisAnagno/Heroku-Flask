@@ -1,5 +1,5 @@
 from uuid import uuid4
-from db import db
+from thflask.db import db
 
 
 class StoreModel(db.Model):
